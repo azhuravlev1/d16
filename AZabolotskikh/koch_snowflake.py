@@ -7,9 +7,9 @@ kAngle = 60
 
 
 def drawKoch(length, depth):
-    if depth == 0:
-        T.forward(length)
-    else:
+	if depth == 0:
+		T.forward(length)
+	else:
 		newLen = length / 3
 		drawKoch(newLen, depth-1)
 		T.left(kAngle)
@@ -19,8 +19,6 @@ def drawKoch(length, depth):
 		T.left(kAngle)
 		drawKoch(newLen, depth-1)
 		
-		
-
 T.penup()
 T.left(180)
 T.forward(200)
