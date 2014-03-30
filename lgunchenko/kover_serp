@@ -1,0 +1,19 @@
+import tkinter
+c = tkinter.Canvas(width = 1000, height = 1000)
+def draw_levi(d, x, y, length, colour):
+	if d == 0:
+		c.create_rectangle(x, y, x+length, y+length, fill = colour)
+	else:
+		draw_levi(d-1, x, y, length/3, colour)
+		draw_levi(d-1, x+length/3, y, length/3, colour)
+		draw_levi(d-1, x, y+length/3, length/3, colour)
+		draw_levi(d-1, x+length*2/3, y, length/3, colour)
+		draw_levi(d-1, x, y+length*2/3, length/3, colour)
+		draw_levi(d-1, x+length*2/3, y+length*2/3, length/3, colour)
+		draw_levi(d-1, x+length*2/3, y+length/3, length/3, colour)
+		draw_levi(d-1, x+length/3, y+length*2/3, length/3, colour)
+		
+
+draw_levi(4, 0, 0, 1000, 'cyan')
+c.pack()
+c.mainloop()
