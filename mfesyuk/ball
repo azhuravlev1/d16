@@ -1,0 +1,41 @@
+import tkinter
+import math
+
+FPS = 10 #frames per second
+
+CANVAS = tkinter.Canvas(width=500, height=300)
+CANVAS.pack()
+
+PHYSICS_SYSTEM = [c.create_rectangle(0, 0, WIDTH, HEIGHT)]
+
+BODY = {'x': 0, 'y': 0, 'velocity_x': 0, 'velocity_y': 0}
+
+def calc_forces(body, PHYSICS_SYSTEM):
+	d_x = body['x']
+	d_y = body['y']
+
+	length = math.sqrt(d_x**2 + d_y**2)
+	d_length = length - PHYSICS_SYSTEM['length']
+	force = d_length * PHYSICS_SYSTEM['stiffness']
+
+	force_x = force * d_x / length
+	force_y = force * d_y / length + 10
+
+	return force_x, force_y
+
+def make_step(physics_system, time_interval):
+	pass
+
+def redraw(canvas, physics_system):
+	pass
+
+def loop():
+	global PHYSICS_SYSTEM
+	make_step(PHYSICS_SYSTEM, 1 / FPS)
+	global CANVAS
+	redraw(CANVAS, PHYSICS_SYSTEM)
+	CANVAS.after(1000 // FPS, loop)
+
+
+loop()
+CANVAS.mainloop()
