@@ -13,6 +13,6 @@ def kovser(dep, a1, a2, l, color):
 		kovser(dep - 1, a1 + l * 2 / 3, a2 + l / 3, l / 3, color)
 		kovser(dep - 1, a1 + l / 3, a2 + l * 2 / 3, l / 3, color)
 		
-kovser(5, 0, 0, 1000, 'navy')
+kovser(5, 0, 0, 900, 'navy')
 c.pack()
 c.mainloop()
