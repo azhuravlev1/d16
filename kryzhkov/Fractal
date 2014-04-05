@@ -1,0 +1,29 @@
+import tkinter
+X = 180
+c = tkinter.Canvas(width=540, height=540)
+
+z=1
+def draw1():
+	global c
+	global z
+	draw(c, z)
+	z = z*3
+	if z<81:
+		return 	c.after(1000 // 1, draw1())
+	
+def draw(c,z):
+	s = X/z
+	for i in range(1,z+1):
+		for j in range(1,z+1):
+			c.create_rectangle(
+		        j*s,
+		        s*i,
+		        j*s +s,
+		        s*i + s,
+		        fill= "black")
+	
+
+
+draw1()
+c.pack()
+c.mainloop()
