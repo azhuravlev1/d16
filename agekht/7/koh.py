@@ -1,6 +1,6 @@
 import turtle
 import tkinter
-turtle.speed(fastest)
+turtle.speed('fastest')
 def qwe(a1, a2, a3):
 	if a1 > 0:
 		qwe(a1 - 1, a2 / 3, a3)
@@ -24,5 +24,5 @@ turtle.backward(200)
 turtle.right(90)
 turtle.forward(50)
 turtle.left(90)
-rty(2,400)
+rty(2, 400)
 input()
