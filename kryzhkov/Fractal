@@ -1,29 +1,19 @@
 import tkinter
-X = 180
-c = tkinter.Canvas(width=540, height=540)
-
-z=1
-def draw1():
-	global c
-	global z
-	draw(c, z)
-	z = z*3
-	if z<81:
-		return 	c.after(1000 // 1, draw1())
-	
-def draw(c,z):
-	s = X/z
-	for i in range(1,z+1):
-		for j in range(1,z+1):
-			c.create_rectangle(
-		        j*s,
-		        s*i,
-		        j*s +s,
-		        s*i + s,
-		        fill= "black")
-	
-
-
-draw1()
+lenght = int(input())
+depth = int(input())
+c = tkinter.Canvas(width = 1920, height = 1080)
+def serpinskie(lenght, depth, x, x1):
+  if depth == 0:
+    c.create_rectangle(x, x1, x + lenght, x1 + lenght, fill = "black" )
+  else:
+    serpinskie(lenght / 3, depth - 1, x, x1) 
+    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1)
+    serpinskie(lenght / 3, depth - 1, x, x1 + lenght / 3)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1)
+    serpinskie(lenght / 3, depth - 1, x, x1 + lenght * 2 / 3)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght * 2 / 3)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght / 3)
+    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1 + lenght * 2 / 3)
+serpinskie(lenght, depth, 0, 0)
 c.pack()
 c.mainloop()
