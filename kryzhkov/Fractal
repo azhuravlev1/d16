@@ -1,19 +1,19 @@
 import tkinter
 lenght = int(input())
 depth = int(input())
-c = tkinter.Canvas(width = 1920, height = 1080)
+c = tkinter.Canvas(width = 900, height = 900)
 def serpinskie(lenght, depth, x, x1):
   if depth == 0:
     c.create_rectangle(x, x1, x + lenght, x1 + lenght, fill = "black" )
   else:
     serpinskie(lenght / 3, depth - 1, x, x1) 
-    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1)
-    serpinskie(lenght / 3, depth - 1, x, x1 + lenght / 3)
-    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1)
-    serpinskie(lenght / 3, depth - 1, x, x1 + lenght * 2 / 3)
-    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght * 2 / 3)
-    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght / 3)
-    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1 + lenght * 2 / 3)
+    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1, black)
+    serpinskie(lenght / 3, depth - 1, x, x1 + lenght / 3, black)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1, black)
+    serpinskie(lenght / 3, depth - 1, x, x1 + lenght * 2 / 3, black)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght * 2 / 3, black)
+    serpinskie(lenght / 3, depth - 1, x + lenght * 2 / 3, x1 + lenght / 3, black)
+    serpinskie(lenght / 3, depth - 1, x + lenght / 3, x1 + lenght * 2 / 3, black)
 serpinskie(lenght, depth, 0, 0)
 c.pack()
 c.mainloop()
