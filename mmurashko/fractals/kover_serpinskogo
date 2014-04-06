@@ -1,0 +1,18 @@
+import tkinter
+c = tkinter.Canvas(width = 800, height = 800)
+def draw_kovserp(depth, x, y, length, colour):
+	if depth == 0:
+		c.create_rectangle(x, y, x+length, y+length, fill = colour)
+	else:
+		draw_kovserp(depth-1, x, y, length/3, colour)
+		draw_kovserp(depth-1, x+length/3, y, length/3, colour)
+		draw_kovserp(depth-1, x, y+length/3, length/3, colour)
+		draw_kovserp(depth-1, x+length*2/3, y, length/3, colour)
+		draw_kovserp(depth-1, x, y+length*2/3, length/3, colour)
+		draw_kovserp(depth-1, x+length*2/3, y+length*2/3, length/3, colour)
+		draw_kovserp(depth-1, x+length*2/3, y+length/3, length/3, colour)
+		draw_kovserp(depth-1, x+length/3, y+length*2/3, length/3, colour)
+
+draw_kovserp(5, 1, 1, 799, 'chartreuse')
+c.pack()
+c.mainloop()
