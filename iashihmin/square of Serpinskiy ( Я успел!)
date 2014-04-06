@@ -1,0 +1,35 @@
+import tkinter
+
+c = tkinter.Canvas(width = 1920, height = 1080)
+
+
+def homework(lenght, depth, x1, x2, colour):
+
+  if depth == 0:
+
+    c.create_rectangle(x1, x2, x1 + lenght, x2 + lenght, fill = colour)
+
+  else:
+    
+    homework(lenght / 3, depth - 1, x1, x2, colour) 
+
+    homework(lenght / 3, depth - 1, x1 + lenght / 3, x2, colour)
+
+    homework(lenght / 3, depth - 1, x1, x2 + lenght / 3, colour)
+
+    homework(lenght / 3, depth - 1, x1 + lenght * 2 / 3, x2, colour)
+
+    homework(lenght / 3, depth - 1, x1, x2 + lenght * 2 / 3, colour)
+
+    homework(lenght / 3, depth - 1, x1 + lenght * 2 / 3, x2 + lenght * 2 / 3, colour)
+
+    homework(lenght / 3, depth - 1, x1 + lenght * 2 / 3, x2 + lenght / 3, colour)
+
+    homework(lenght / 3, depth - 1, x1 + lenght / 3, x2 + lenght * 2 / 3, colour)
+
+
+homework(1000, 5, 0, 0, 'black')
+
+
+c.pack()
+c.mainloop()
