@@ -1,0 +1,47 @@
+import tkinter
+import math
+
+FPS = 2 #frames per second, i.e. how many step do you have in one second
+
+
+ws = int(input('wind_speed'))
+
+WIDTH = 900
+HEIGHT = 1000
+CANVAS = tkinter.Canvas(width=WIDTH, height=HEIGHT)
+CANVAS.pack()
+
+PHYSICS_SYSTEM = {'velocity':100, 'angle': 31, 'g':10,'wind_speed':ws}
+body1 = {'x':100, 'y':HEIGHT-100, 'velocity_x': PHYSICS_SYSTEM['velocity']* math.cos(PHYSICS_SYSTEM['angle'])+PHYSICS_SYSTEM['wind_speed'], 'velocity_y':PHYSICS_SYSTEM['velocity']* math.sin(PHYSICS_SYSTEM['angle'])}
+body2 = {'x':WIDTH-100, 'y':HEIGHT-100, 'velocity_x': -PHYSICS_SYSTEM['velocity']* math.cos(PHYSICS_SYSTEM['angle'])+PHYSICS_SYSTEM['wind_speed'], 'velocity_y':PHYSICS_SYSTEM['velocity']* math.sin(PHYSICS_SYSTEM['angle'])}
+
+
+
+def make_step(physics_system, time_interval):
+    if body1['x']+5>=body2['x']-5:
+        body1['velocity_x']=-PHYSICS_SYSTEM['velocity']* math.cos(PHYSICS_SYSTEM['angle'])+PHYSICS_SYSTEM['wind_speed']
+        body2['velocity_x']= PHYSICS_SYSTEM['velocity']* math.cos(PHYSICS_SYSTEM['angle'])+PHYSICS_SYSTEM['wind_speed']
+    body1['x'] += body1['velocity_x'] * time_interval
+    body2['x'] += body2['velocity_x'] * time_interval
+    body1['y'] += body1['velocity_y'] * time_interval
+    body2['y'] += body2['velocity_y'] * time_interval
+    body1['velocity_y'] += PHYSICS_SYSTEM['g'] * time_interval
+    body2['velocity_y'] += PHYSICS_SYSTEM['g'] * time_interval
+
+    
+
+def redraw(canvas, physics_system):
+    #canvas.delete(*canvas.find_all())
+    canvas.create_oval(body1['x'] - 5, body1['y'] - 5, body1['x'] + 5, body1['y'] + 5, fill='red')
+    canvas.create_oval(body2['x'] - 5, body2['y'] - 5, body2['x'] + 5, body2['y'] + 5, fill='green')
+    
+
+def loop():
+    global PHYSICS_SYSTEM
+    make_step(PHYSICS_SYSTEM, 1 / 5 * FPS)
+    global CANVAS
+    redraw(CANVAS, PHYSICS_SYSTEM)
+    CANVAS.after(1000 // FPS, loop)
+
+loop()
+CANVAS.mainloop()
