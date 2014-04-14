@@ -7,6 +7,7 @@
 //
 
 #import "ZMMyScene.h"
+#define kAttrPower 3
 
 
 enum : NSUInteger {
@@ -21,6 +22,9 @@ enum : NSUInteger {
 
 static inline CGVector rwSubVec(CGPoint a, CGPoint b) {
     return CGVectorMake(a.x - b.x, a.y - b.y);
+}
+static inline CGVector rwPowVec(CGVector a, float b) {
+    return CGVectorMake(pow(a.x, b), pow(a.y, b));
 }
 
 static inline float rwLengthVec(CGVector a) {
@@ -83,7 +87,7 @@ static inline CGVector rwMulVec(CGVector a, float b) {
     for (SKShapeNode *magnet in _magnets) {
 		for (SKShapeNode *body in _bodies) {
 			CGVector dist = rwSubVec(magnet.position, body.position);
-			CGVector force = rwMulVec(rwNormalizeVec(dist), 500/rwLengthVec(dist)*self.direction);
+			CGVector force = rwMulVec(rwNormalizeVec(dist), 500/pow(rwLengthVec(dist), kAttrPower)*self.direction);
 			[body.physicsBody applyForce:force];
 		}
 	}
