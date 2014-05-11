@@ -1,0 +1,8 @@
+f = list(map(int, input().split()))
+s = list(map(int, input().split()))
+k = frozenset(f)
+m = frozenset(s)
+u = k.union(m)
+i = k.intersection(m)
+print(u)
+print(m)
