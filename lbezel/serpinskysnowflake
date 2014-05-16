@@ -1,0 +1,24 @@
+import turtle
+import tkinter
+
+turtle.speed("fastest")
+angle = 30
+linelength = 300
+def serpinskysnowflake(linelength, nitr):
+	if nitr == 0:
+		turtle.forward(linelength)
+	else:		
+		serpinskysnowflake(linelength/3, nitr - 1)
+		turtle.left(2*angle)
+		serpinskysnowflake(linelength/3, nitr - 1)
+		turtle.right(4*angle)	
+		serpinskysnowflake(linelength/3, nitr - 1)
+		turtle.left(2*angle)	
+		serpinskysnowflake(linelength/3, nitr - 1)			
+nitr = int(input())
+serpinskysnowflake(linelength, nitr)
+turtle.right(4*angle)
+serpinskysnowflake(linelength, nitr)
+turtle.right(4*angle)
+serpinskysnowflake(linelength, nitr)
+input()
