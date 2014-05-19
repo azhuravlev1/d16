@@ -15,7 +15,7 @@ def make_step(state, time_interval):
         state['y']=state['y']
     else:
         state['x']=state['x']+vx*time_interval
-        state['vy']=g*time_interval
+        state['vy']+=g*time_interval
         state['y']=state['y']+state['vy']*time_interval
 def redraw(c, state):
     c.delete(*c.find_all())
