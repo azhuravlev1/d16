@@ -6,9 +6,12 @@ from collections import namedtuple
 
 WIDTH=1200
 HEIGHT=600
-FPS = 1000
-MASSA = [200,1]
-m=MASSA
+FPS = 100
+# MASS = [2,30]
+# MASS = [2,3]
+# MASS = [2,3]
+# MASS = [2,3]
+m=MASS
 HOLE_FILL='black'
 FIELD_COLOR='green'
 BORDER_COLOR='dark green'
@@ -27,6 +30,7 @@ stick=False
 l=200
 angle=90
 bort=50
+
 FILL=['red','blue','white','brown','yellow','orange','grey']
 FILL1=['red','white','white','white','white','white','red']
 fill=FILL1
@@ -77,6 +81,7 @@ def make_move(lgame):
     if not(10+R[1]<positionx1+v[1]<WIDTH-R[1]-10):
         v[1]=-v[1]
     if not( abs(positionx0-positionx1)>(2*((R[0]*R[1])**0.5))+1):
+        m0, m1 = MASS[0], MASS[1]
         u0=(2*m[1]*v[1]+v[0]*(m[0]-m[1]))/(m[0]+m[1])
         u1=(2*m[0]*v[0]+v[1]*(m[1]-m[0]))/(m[0]+m[1])
         v[0]=u0
@@ -85,14 +90,14 @@ def make_move(lgame):
         R[1]+=0.1
     positionx0+=v[0]
     positionx1+=v[1]
-    return [[positionx0, positiony0, angle0, True], 
+    return [[positionx0, positiony0, angle0, True],
             [positionx1, positiony1,angle1, True]]
 if __name__ == "__main__":
     c = tkinter.Canvas(width=WIDTH-2, height=HEIGHT-2)
     c.pack()
     c.focus_set()
 c.bind('<Button-1>',wend)
-def loop(): 
+def loop():
     global lgame
     draw_field(c, lgame)
     lgame = make_move(lgame)

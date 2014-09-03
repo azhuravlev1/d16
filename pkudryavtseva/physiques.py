@@ -23,10 +23,14 @@ def angle(event):
 
 
 def make_step(state, time_interval):
-
     state['x'] += (state['vx']-state['vxwind'])*time_interval 
     state['y'] -= (state['vy']-state['vywind'])*time_interval
     state['vy'] -= state['g']
+    if (state['x']) >= 800:
+        state['vx'] = -state['vx'];
+        state['vy'] = -state['vy'];
+    if (state['y']) >= 500:
+        state['y'] = 500;
 
 def redraw(canvas, state):
     canvas.delete(*canvas.find_all())

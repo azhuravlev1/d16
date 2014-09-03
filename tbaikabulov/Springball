@@ -1,5 +1,6 @@
 import random
 import math
+import tkinter
 from collections import namedtuple
 
 WIDTH=1200
@@ -83,14 +84,14 @@ def make_move(lgame):
         R[1]+=0.1
     positionx0+=v[0]
     positionx1+=v[1]
-    return [[positionx0, positiony0, angle0, True], 
+    return [[positionx0, positiony0, angle0, True],
             [positionx1, positiony1,angle1, True]]
 if __name__ == "__main__":
     c = tkinter.Canvas(width=WIDTH-2, height=HEIGHT-2)
     c.pack()
     c.focus_set()
 c.bind('<Button-1>',wend)
-def loop(): 
+def loop():
     global lgame
     draw_field(c, lgame)
     lgame = make_move(lgame)

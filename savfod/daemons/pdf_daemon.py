@@ -5,9 +5,9 @@ import sys
 import time
 import file_changes_watcher
 
-WATCH_DIRECTORIES = ['/home/sav/Dropbox/d16-calculus', '/home/sav/Dropbox/d16-programming']
+WATCH_DIRECTORIES = ['/home/alex/Dropbox/d16-calculus', '/home/alex/Dropbox/d16-programming']
 STOPWORDS = ['related']
-WAIT_TIME = 10 
+WAIT_TIME = 10
 
 def make_pdf(file_path):
 	directory, file_name = os.path.split(file_path)
@@ -23,7 +23,10 @@ def make_pdf(file_path):
 
 	subprocess.call('iconv -f utf-8 -t cp1251 ' + '"' + file_path + '" > "' + file_name + '"', shell=True)
 	p = subprocess.Popen(['pdflatex', '-shell-escape', '-halt-on-error', '"' + file_name + '"'])
-	p.wait(WAIT_TIME)
+	try:
+		p.wait(WAIT_TIME)
+	except subprocess.TimeoutExpired:
+		pass
 
 	if os.path.exists(pdf_name):
 		print("success")

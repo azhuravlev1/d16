@@ -7,7 +7,7 @@ import time
 import csv
 import file_changes_watcher
 
-WATCH_DIRECTORIES = ['/home/sav/Dropbox/d16-calculus/Results']
+WATCH_DIRECTORIES = ['/home/alex/Dropbox/d16-calculus/Results']
 
 PUPILS_NAMES=[\
 "Ашихмин Иван",\
@@ -31,45 +31,45 @@ PUPILS_NAMES=[\
 "Шуваева Елизавета",\
 ]
 
-PIVOT_DIR = '/home/sav/Dropbox/d16-calculus/Results/PivotTables/'
+PIVOT_DIR = '/home/alex/Dropbox/d16-calculus/Results/PivotTables/'
 
 PIVOT_TABLES = {\
 "Common": PUPILS_NAMES\
 ,\
 "Asya": [\
+"Байкабулов Тимур",\
 "Гехт Артём",\
-"Забазарных Варвара",\
 "Заболотских Александр",\
 ], \
 "Dima": [\
-"Крылов Дмитрий",\
+"Забазарных Варвара",\
+"Кудрявцев Еремей",\
 "Машкова Ольга",\
-"Рыжков Кирилл",\
 ], \
 "Grisha": [\
-"Гунченко Любовь",\
-"Журавлёв Андрей",\
-"Кудрявцев Еремей",\
-], \
-"Kirill": [\
-"Кудрявцева Полина",\
-"Суханов Григорий",\
+"Злобин Александр",\
+"Крылов Дмитрий",\
 "Фесюк Марина",\
 ], \
+"Kirill": [\
+"Журавлёв Андрей",\
+"Кудрявцева Полина",\
+"Мурашко Матвей",\
+"Рыжков Кирилл",\
+], \
 "Lesha": [\
-"Байкабулов Тимур",\
-"Злобин Александр",\
+"Гунченко Любовь",\
+"Павловский Миша",\
 "Шуваева Елизавета",\
 ], \
 "Lida": [\
 "Ашихмин Иван",\
 "Безель Елизавета",\
-"Мурашко Матвей",\
 "Хумонен Иннокентий",\
 ], \
 }
 
-PERSONAL_DIR='/home/sav/Dropbox/d16-calculus/Results/PersonalResults/'
+PERSONAL_DIR='/home/alex/Dropbox/d16-calculus/Results/PersonalResults/'
 
 FILE_START=\
 "\
@@ -104,7 +104,7 @@ def split_to_task_and_subtask(name):
 	subtask = ""
 	for c in name:
 		if c.isdigit():
-			task += c 
+			task += c
 		else:
 			subtask += c
 	return task, subtask
@@ -139,14 +139,14 @@ class generate_tex_table_string:
 		self.__str += "&".join(number_strings) + "\\\\\n"
 
 		self.__str += "\\hline\n"
-	
+
 		subtask_stings = []
 		for n in numbers:
 			subtask_stings += tasks[n]
 		self.__str += "&".join(subtask_stings) + "\\\\\n"
 
 		self.__str += "\\hline\n"
-	
+
 
 	def add_row(self, value_list):
 		values = value_list + [''] * (self.__col_count - len(value_list))
@@ -164,7 +164,7 @@ def read_csv(file_path):
 	new_rows = []
 	for row in table:
 		if len(row) < 2:
-			print(row, file_path) 
+			print(row, file_path)
 		new_row = [row[0] + ' ' + row[1]] + row[2:]
 		new_rows.append(new_row)
 
@@ -201,7 +201,7 @@ def wide_table_to_tables(table):
 			subtables[i].append(new_row)
 
 	return subtables
-	
+
 def tables_to_string_with_tex(tables, names, tables_on_different_pages=False):
 	s = FILE_START
 	for t, name in zip(tables, names):
@@ -234,7 +234,7 @@ def generate_tex_files(all_files):
 	for path in all_files:
 		tables.append(read_csv(path))
 		names.append(get_table_name(path))
-	
+
 	for table_name, needed_rows in PIVOT_TABLES.items():
 		pivot_sheets = [get_needed_rows(t, needed_rows) for t in tables]
 		s = tables_to_string_with_tex(pivot_sheets, names, table_name=="Common")
