@@ -1,0 +1,1 @@
+print(*[y for x, y in zip(range(100), list(map(int, input().split()))) if (y%2 == 0)])
