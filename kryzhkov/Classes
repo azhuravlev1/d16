@@ -1,0 +1,44 @@
+import random
+class ring:
+	magic_power = 100
+	owner = None
+	def more_power(self,diff):
+		self.magic_power = diff
+ring1= ring()
+ring2= ring()
+ring1.magic_power = 1000
+ring2.magic_power = 324
+ring1.more_power(588)
+
+print('Lets BATTLE')
+class Hobbit:
+	hair_color = "green"
+	name = "Pippin"
+	Ring = ring1
+	lenght_leg_hair = 57
+	def more_hair(self,diff):
+		self.lenght_leg_hair = diff
+	def take_ring(self,diff,owner):
+		self.Ring = diff
+		self.Ring = "owner"
+	def lose_ring(self):
+		self.Ring = "NONE"
+hobbit1 = Hobbit()
+hobbit2 = Hobbit()
+win = Hobbit()	
+hobbit1.name = "Mary"
+hobbit2.name = "Pippin"
+a = random.randrange(2)
+if a == 1:
+	hobbit1.more_hair(0)
+	hobbit1.lose_ring()
+	hobbit2.take_ring(ring1.magic_power)
+	win.name = hobbit1.name
+
+if a == 0: 
+	hobbit2.more_hair(0)
+	hobbit2.lose_ring()
+	hobbit1.take_ring(ring2.magic_power)
+	win.name = hobbit2.name
+
+print("Looser", win.name, ";",hobbit1.name,' RING ----', hobbit1.Ring, '  lenght_leg_hair = ', hobbit1.lenght_leg_hair, hobbit2.name,'RING ---- ', hobbit2.Ring,'lenght_leg_hair = ', 	 hobbit2.lenght_leg_hair)
