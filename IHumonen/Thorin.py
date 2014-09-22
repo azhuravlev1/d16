@@ -5,9 +5,9 @@ class Orc:
 		self.size = 100
 	def rage(self):
 		self.anger = 100
+		print('tebya pogret ogon!')
 	def power(self):
-		self.strenght=self.strenght*self.anger+size
-		print('your power= ', self.strenght)
+		self.strenght=self.strenght*self.anger+self.size
 		return self.strenght
 	def eat(self, meat):
 		self.size+=meat
@@ -29,6 +29,8 @@ def  battle(x, y):
 	x.eat(meat)
 	y.say()
 	x.rage()
+	x.power()
+	y.power()
 	if gryshnak.strenght > Thorin_Eikinskjaldi.strenght:
 		print('gryshnak win')
 	else:
@@ -37,3 +39,4 @@ def  battle(x, y):
 Thorin_Eikinskjaldi=gnome_hero()
 battle(gryshnak, Thorin_Eikinskjaldi)
 #gryshnak
+a=input()
