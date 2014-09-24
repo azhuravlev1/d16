@@ -25,12 +25,14 @@ PUPILS_NAMES=[\
 "Машкова Ольга",\
 "Мурашко Матвей",\
 "Рыжков Кирилл",\
+"Павловский Михаил",\
 "Суханов Григорий",\
 "Фесюк Марина",\
 "Хумонен Иннокентий",\
 "Шуваева Елизавета",\
 ]
 
+BY_LIST_RESULTS_DIR = '/home/alex/Dropbox/d16-calculus/Results/ByListResults/'
 PIVOT_DIR = '/home/alex/Dropbox/d16-calculus/Results/PivotTables/'
 
 PIVOT_TABLES = {\
@@ -52,14 +54,14 @@ PIVOT_TABLES = {\
 "Фесюк Марина",\
 ], \
 "Kirill": [\
-"Журавлёв Андрей",\
 "Кудрявцева Полина",\
 "Мурашко Матвей",\
 "Рыжков Кирилл",\
 ], \
 "Lesha": [\
 "Гунченко Любовь",\
-"Павловский Миша",\
+"Журавлёв Андрей",\
+"Павловский Михаил",\
 "Шуваева Елизавета",\
 ], \
 "Lida": [\
@@ -81,6 +83,7 @@ FILE_START=\
 \\usepackage{wrapfig}\n\
 \\usepackage{tikz}\n\
 \\usepackage{graphicx}\n\
+\\usepackage{placeins}\n\
 \\usetikzlibrary{calc}\n\
 \\textheight=180truemm\n\
 \\textwidth=260truemm\n\
@@ -92,9 +95,11 @@ FILE_END=\
 \\end{document}\n\
 "
 
+
+
 NOT_TASKS = ["name", "surname"]
 
-MAX_COL_COUNT = 30
+MAX_COL_COUNT = 25
 
 
 def split_to_task_and_subtask(name):
@@ -127,7 +132,7 @@ class generate_tex_table_string:
 	def __init__(self, col_names, name=""):
 		self.__col_count = len(col_names)
 
-		self.__str = "\\begin{table}\n"
+		self.__str = "\\begin{table}[!tbph]\n"
 		self.__str += name + '\n\n'
 		self.__str += "\\begin{tabular}{|" + '|'.join(['c'] * (len(col_names)) )  + "|}\n"
 		self.__str += "\\hline\n"
@@ -155,7 +160,7 @@ class generate_tex_table_string:
 		self.__str += "\\hline\n"
 
 	def get_table_string(self):
-		return self.__str + "\\end{tabular}\n\\end{table}\n"
+		return self.__str + "\\end{tabular}\n\\end{table}\n\\FloatBarrier\n"
 
 def read_csv(file_path):
 	table = csv.reader(open(file_path, 'r'), delimiter='\t')
@@ -216,7 +221,7 @@ def tables_to_string_with_tex(tables, names, tables_on_different_pages=False):
 			s += table_to_tex(sub, name + suffix)
 			s += "\n"
 			if tables_on_different_pages:
-				s += "\\newpage\n"
+				s += "\\clearpage\n"
 	s += FILE_END
 	return s
 
@@ -231,9 +236,14 @@ def get_table_name(path):
 def generate_tex_files(all_files):
 	tables = []
 	names = []
+
 	for path in all_files:
 		tables.append(read_csv(path))
 		names.append(get_table_name(path))
+
+		pivot_sheet = get_needed_rows(tables[-1], PUPILS_NAMES)
+		s = tables_to_string_with_tex([pivot_sheet], [names[-1]])
+		save_to_file(s, BY_LIST_RESULTS_DIR + names[-1] + '.tex')
 
 	for table_name, needed_rows in PIVOT_TABLES.items():
 		pivot_sheets = [get_needed_rows(t, needed_rows) for t in tables]
