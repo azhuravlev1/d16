@@ -1,0 +1,1 @@
+print(min([m for m in list(map(float, input().split())) if m > 0]))  
