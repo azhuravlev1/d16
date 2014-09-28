@@ -1,0 +1,21 @@
+class animal:
+    can_fly=False
+    can_swim=False
+    health=100
+    def make_bird(self):
+        self.can_fly=True
+        self.can_swim=False
+    def make_fish(self):
+        self.can_fly=False
+        self.can_swim=True
+class stone:
+    size=100
+def eat(animal1,animal2):
+    animal2.health=0
+    animal1.health+=10
+Cat=animal()
+Dog=animal()
+diamond=stone()
+Dog.make_fish()
+Cat.make_bird()
+eat(Cat,Dog)
