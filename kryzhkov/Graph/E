@@ -1,0 +1,9 @@
+a = int(input())
+x = []
+for z in range(a):
+	x = x + list(map(int, input().split()))
+for z in range(a):
+	for y in range(a):	
+		if x[z*a+y] == 1:
+			print(z+1,' ',y+1, sep = '')
+			x[y*a+z] = 0
