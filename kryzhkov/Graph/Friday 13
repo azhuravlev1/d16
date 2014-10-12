@@ -1,0 +1,8 @@
+a = int(input())
+b = int(input())
+s = 0
+for x in range(a):
+    if b%7 == 0:
+        s +=1
+    b = b + 2
+print(s)
