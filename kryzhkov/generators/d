@@ -1,0 +1,15 @@
+b = int(input())
+s = []
+for x in range(b):
+	s = s + list(map(int, input().split()))
+
+min = 10000000
+for t in range(b):
+	for y in range(b):
+		for u in range(b):
+			sum = (s[t*b + y]) + (s[t*b + u])  + (s[u*b + y]) 
+
+			if (sum < min) and (u !=y) and (u !=t)  and (y !=t): 
+				min == sum
+				u = [t+1,y+1,u+1]
+print(*u)
