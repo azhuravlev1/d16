@@ -1,0 +1,19 @@
+
+class Vershins(object):
+	isvisited = False
+	asd = []
+	def DFS(self):
+		if self.isvisited == False:
+			for x in self.asd:
+				x.DFS()
+				
+			self.isvisited = True
+
+s = list(map(int,input().split()))
+b = []*s[0]
+for x in range(s[0]):
+	b[x] = Vershins()
+	b[x].asd = list(map(int,input().split()))
+
+b[s[1].DFS()
+	
