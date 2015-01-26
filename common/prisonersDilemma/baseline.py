@@ -1,7 +1,7 @@
 import random
 
 def Angry(my_moves, enemy_moves):
-    return False
+    return True
 
 def Kind(my_moves, enemy_moves):
     return True
@@ -11,3 +11,6 @@ def Random(my_moves, enemy_moves):
 
 def Unforgiving(my_moves, enemy_moves):
     return False not in enemy_moves
+def king(my_moves, enemy_moves):
+	   return False
+	   #hahahahahahahahahahahahahahahahahahahahahahahahahahahahah
